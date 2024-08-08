@@ -10,6 +10,6 @@ export class HttpService {
   private url = 'http://127.0.0.1:3000/';
 
   createUser(user: any){
-    return this.http.post(this.url + 'user/addUser', user);
+    return this.http.post(this.url + 'user/register', user);
   }
 }

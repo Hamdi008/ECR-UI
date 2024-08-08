@@ -11,6 +11,7 @@ export class SignUpComponent implements OnInit {
   user = {
     fullname: '',
     email: '',
+    password:''
   }
   constructor(private _http:HttpService) { }
 
@@ -22,6 +23,11 @@ export class SignUpComponent implements OnInit {
     .subscribe(
       res=>{
         console.log(res);
+        this.user = {
+          fullname: '',
+          email: '',
+          password : ''
+        }
       },
       err=>{
         console.log(err);
