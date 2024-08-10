@@ -13,7 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopupComponent } from './components/popup/popup.component';
 import {MatDialogModule } from '@angular/material/dialog';
 import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component'
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ServicesComponent } from './components/services/services.component'
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
     PopupComponent,
     HomeComponent,
     NotFoundComponent,
+    ContactComponent,
+    ServicesComponent,
   ],
   imports: [
     BrowserModule,
