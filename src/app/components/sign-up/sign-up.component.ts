@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,9 +15,18 @@ export class SignUpComponent implements OnInit {
     email: '',
     password:''
   }
-  constructor(private _http:HttpService) { }
+  constructor(private _http:HttpService, private matDialogRef: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(title: String, msg:String){
+    this.matDialogRef.open(PopupComponent,{
+      data : {
+        title: title,
+        msg:msg
+      }
+    });
   }
 
   signUp(){
@@ -23,6 +34,7 @@ export class SignUpComponent implements OnInit {
     .subscribe(
       res=>{
         console.log(res);
+        this.openDialog("Welcome " + this.user.fullname, "You are successfully Signed Up");
         this.user = {
           fullname: '',
           email: '',
@@ -31,6 +43,7 @@ export class SignUpComponent implements OnInit {
       },
       err=>{
         console.log(err);
+        this.openDialog("Hi " + this.user.fullname, "Sign Up Failed");
       }
     )
   }

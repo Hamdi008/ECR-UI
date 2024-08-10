@@ -9,7 +9,9 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopupComponent } from './components/popup/popup.component';
+import {MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     FooterComponent,
     SignUpComponent,
     SignInComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
