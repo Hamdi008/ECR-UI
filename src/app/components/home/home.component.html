@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div>
+    <div>
+        <h3>WebSocket Messages</h3>
+        <ul>
+          <li *ngFor="let message of messages">{{ message }}</li>
+        </ul>
+    </div>
+
+      <div class="json-template-container">
+        <h2>JSON Request</h2>
+        <textarea #messageInput class="json-template" >
+{
+}
+        </textarea>
+        <button (click)="sendMessage(messageInput.value)" class="send-button">Send</button>
+    </div>
+  </div>
+  
