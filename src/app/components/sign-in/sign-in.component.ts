@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
 import { PopupComponent } from '../popup/popup.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +15,7 @@ export class SignInComponent implements OnInit {
     email:"",
     password :""
   }
-  constructor(private authService: AuthService, private dialogRef: MatDialog) { }
+  constructor(private authService: AuthService, private dialogRef: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +34,7 @@ export class SignInComponent implements OnInit {
       next: (response) => {
         localStorage.setItem('token', response.token);
         this.openDialog("Sign In", "You are successfully Signed In!");
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         this.openDialog("Sign In", "Sign In failed!");

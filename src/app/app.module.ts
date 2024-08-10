@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopupComponent } from './components/popup/popup.component';
-import {MatDialogModule } from '@angular/material/dialog'
+import {MatDialogModule } from '@angular/material/dialog';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import {MatDialogModule } from '@angular/material/dialog'
     SignUpComponent,
     SignInComponent,
     PopupComponent,
+    HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
