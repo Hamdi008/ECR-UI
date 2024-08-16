@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/WebSocket/websocket.service';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { SettingPopupComponent } from '../setting-popup/setting-popup.component';
-import { SharedDataService } from 'src/app/services/SharedData/shared-data.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-single-mode',
+  templateUrl: './single-mode.component.html',
+  styleUrls: ['./single-mode.component.css']
 })
-export class HomeComponent implements OnInit {
+export class SingleModeComponent implements OnInit {
+
 
   private wsSubscription!: Subscription;
   private messages: any[] = []; // Array to store all incoming messages
@@ -19,10 +17,7 @@ export class HomeComponent implements OnInit {
   dataToSend = '';
   public formattedJson = '';
 
-  
-  public showSettingsPopup = false; // Controls visibility of the settings popup
-
-  constructor(private websocketService: WebsocketService, private matDialogRef: MatDialog, public _sharedData: SharedDataService) {}
+  constructor(private websocketService: WebsocketService) {}
 
   ngOnInit() {
     // Connect to the WebSocket server and handle messages
@@ -61,7 +56,7 @@ export class HomeComponent implements OnInit {
     this.messages = []; // Clear the messages array
     this.formattedJson = ''; // Clear the formatted JSON
   }
-
+  
   ngOnDestroy() {
     // Unsubscribe and close the WebSocket connection when the component is destroyed
     if (this.wsSubscription) {
@@ -69,33 +64,4 @@ export class HomeComponent implements OnInit {
     }
     this.websocketService.close();
   }
-
-  openDialog(title: String, msg:String){
-    this.matDialogRef.open(SettingPopupComponent,{
-      data : {
-        title: title,
-        msg:msg
-      }
-    });
-  }
-
-  OpenSettingDialog(){
-    this.openDialog("", "");
-  }
-
-  openSettings() {
-    this.showSettingsPopup = true; // Show the settings popup
-  }
-
-  closeSettings() {
-    console.log("closeSettings");
-    this.showSettingsPopup = false; // Hide the settings popup
-    this._sharedData.settings.communicationMode = "multiple"
-  }
-
-  onModeChange(mode: string) {
-    this._sharedData.settings.communicationMode = mode; // Update the selected mode
-    this.closeSettings(); // Close the settings popup
-  }
-
 }

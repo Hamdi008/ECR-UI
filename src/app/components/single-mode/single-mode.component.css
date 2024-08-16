@@ -46,9 +46,3 @@
 .send-button:hover {
     background-color: #0056b3;
 }
-
-.status-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }

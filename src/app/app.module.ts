@@ -15,7 +15,10 @@ import {MatDialogModule } from '@angular/material/dialog';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { ServicesComponent } from './components/services/services.component'
+import { ServicesComponent } from './components/services/services.component';
+import { SingleModeComponent } from './components/single-mode/single-mode.component';
+import { MultipleModeComponent } from './components/multiple-mode/multiple-mode.component';
+import { SettingPopupComponent } from './components/setting-popup/setting-popup.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { ServicesComponent } from './components/services/services.component'
     NotFoundComponent,
     ContactComponent,
     ServicesComponent,
+    SingleModeComponent,
+    MultipleModeComponent,
+    SettingPopupComponent,
   ],
   imports: [
     BrowserModule,
