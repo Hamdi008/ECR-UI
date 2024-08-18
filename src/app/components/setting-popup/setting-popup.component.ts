@@ -14,7 +14,7 @@ export class SettingPopupComponent implements OnInit {
 
     // default settings
     settings = {
-      communicationMode: 'multiple',
+      communicationMode: 'single',
       communicationType: 'Client',
       serverAddress: 'ws://127.0.0.1:50000',
       portNumber: '50000',
@@ -23,11 +23,6 @@ export class SettingPopupComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
-  public selectedMode: string = 'single'; // Default mode
-
-
 
   closePopup() {
     this.dialogRef.close();

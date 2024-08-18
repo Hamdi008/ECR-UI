@@ -1,30 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, Input } from '@angular/core';
 import { WebsocketService } from 'src/app/services/WebSocket/websocket.service';
 import { Subscription } from 'rxjs';
+import { SharedDataService } from 'src/app/services/SharedData/shared-data.service';
+
+
+// Extend the FileSystemFileHandle interface
+interface FileSystemFileHandle {
+  createWritable(): Promise<FileSystemWritableFileStream>;
+  getFile(): Promise<File>;
+}
+
+// Declare the writable stream type
+interface FileSystemWritableFileStream extends WritableStream {
+  write(data: any): Promise<void>;
+  close(): Promise<void>;
+}
 
 @Component({
   selector: 'app-single-mode',
   templateUrl: './single-mode.component.html',
   styleUrls: ['./single-mode.component.css']
 })
-export class SingleModeComponent implements OnInit {
+export class SingleModeComponent implements OnInit, DoCheck  {
 
 
+  private fileHandle: FileSystemFileHandle | null = null;
   private wsSubscription!: Subscription;
   private messages: any[] = []; // Array to store all incoming messages
-  public connectionStatus = 'Disconnected';
 
   dataToSend = '';
   public formattedJson = '';
 
-  constructor(private websocketService: WebsocketService) {}
+  constructor(private websocketService: WebsocketService, private sharedData: SharedDataService) {}
 
   ngOnInit() {
     // Connect to the WebSocket server and handle messages
     this.wsSubscription = this.websocketService.connect('ws://192.168.116.249:50000').subscribe(
       (message) => {
         if (message.type === 'open') {
-          this.connectionStatus = 'Connected';
+          this.sharedData.connectionStatus = 'Connected';
         } else if (message.type === 'message') {
           try {
             // Parse the incoming message data as JSON
@@ -39,12 +53,14 @@ export class SingleModeComponent implements OnInit {
       },
       (error) => {
         console.error('WebSocket error:', error);
-        this.connectionStatus = 'Error';
+        this.sharedData.connectionStatus = 'Error';
       },
       () => {
-        this.connectionStatus = 'Disconnected';
+        this.sharedData.connectionStatus = 'Disconnected';
       }
     );
+    
+    this.requestFileHandle();
   }
 
   sendMessage() {
@@ -64,4 +80,94 @@ export class SingleModeComponent implements OnInit {
     }
     this.websocketService.close();
   }
+  
+  
+  JsonResponseTextAreaContent: string = '';
+  private previousJsonResponseTextAreaContentContent: string = '';
+
+  ngDoCheck(): void {
+    console.log(this.JsonResponseTextAreaContent)
+    if (this.JsonResponseTextAreaContent !== this.previousJsonResponseTextAreaContentContent) {
+      console.log('textArea2Content has changed');
+      this.previousJsonResponseTextAreaContentContent = this.JsonResponseTextAreaContent;
+      
+      this.saveContentFromJsonResponseTextArea();
+    }
+  }
+
+
+  private async requestFileHandle(): Promise<void> {
+    try {
+      this.fileHandle = await (window as any).showSaveFilePicker({
+        suggestedName: 'real-time-text.txt',
+        types: [{
+          description: 'Text Files',
+          accept: { 'text/plain': ['.txt'] },
+        }],
+      });
+    } catch (error) {
+      console.error('File picker was canceled or an error occurred:', error);
+    }
+  }
+
+  public async saveContentFromJsonRequestTextArea(): Promise<void> {
+    if (this.fileHandle) {
+      try {
+        const textarea = document.getElementById('JsonRequestTextArea') as HTMLTextAreaElement;
+        if (!textarea) {
+          console.error('JsonRequestTextArea element not found');
+          return;
+        }
+        const content1 = textarea.value;
+
+        const file = await this.fileHandle.getFile();
+        const currentContent = await file.text();
+
+        let newContent = currentContent;
+        if (content1) {
+          newContent += content1 + '\n'; // Append content from the first textarea
+        }
+
+        const writable = await this.fileHandle.createWritable();
+        await writable.write(newContent);
+        await writable.close();
+
+        console.log('Content from JsonRequestTextArea saved:', newContent);
+      } catch (error) {
+        console.error('Error writing to the file:', error);
+      }
+    }
+  }
+
+  public async saveContentFromJsonResponseTextArea(): Promise<void> {
+    if (this.fileHandle) {
+      try {
+        const textarea = document.getElementById('JsonResponseTextArea') as HTMLTextAreaElement;
+        if (!textarea) {
+          console.error('JsonResponseTextArea element not found');
+          return;
+        }
+        console.log('JsonResponseTextArea element is  found');
+        const content2 = textarea.value;
+
+        const file = await this.fileHandle.getFile();
+        const currentContent = await file.text();
+
+        let newContent = currentContent;
+        if (content2) {
+          newContent += content2 + '\n'; // Append content from the second textarea
+        }
+
+        const writable = await this.fileHandle.createWritable();
+        await writable.write(newContent);
+        await writable.close();
+
+        console.log('Content from JsonResponseTextArea saved:', newContent);
+      } catch (error) {
+        console.error('Error writing to the file:', error);
+      }
+    }
+  }
+
+
 }

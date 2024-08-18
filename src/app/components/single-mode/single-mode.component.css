@@ -13,20 +13,20 @@
     height: 400px;
     font-family: monospace;
     font-size: 14px;
-    background-color: #e9ecef;
+    background-color: #343434;
     border: none;
     resize: none;
     overflow: auto;
     padding: 10px;
     white-space: pre-wrap; /* This will preserve the formatting of JSON */
     word-wrap: break-word;
-    color: #333;
+    color: #fff;
     outline: none; /* Remove outline when clicking */
     border-radius: 5px;
 }
 .json-template[readonly] {
-    background-color: #e9ecef;
-    color: #333;
+    background-color: #343434;
+    color: #fff;
 }
 
 .send-button {

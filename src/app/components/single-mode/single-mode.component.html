@@ -1,11 +1,11 @@
 <div class="json-template-container">
     <h2>JSON Request</h2>
-    <textarea [(ngModel)]="dataToSend"  class="json-template" >
+    <textarea id="JsonRequestTextArea" [(ngModel)]="dataToSend"  class="json-template" >
     </textarea>
-    <button (click)="sendMessage()" class="send-button">Send</button>
+    <button (click)="sendMessage(); saveContentFromJsonRequestTextArea()" class="send-button">Send</button>
     <div>
       <h2>Received JSON Data</h2>
-      <textarea [value]="formattedJson" class="json-template" readonly></textarea>
-      <button (click)="clearData()" class="send-button">Clear</button>
+      <textarea  [(ngModel)]="JsonResponseTextAreaContent" id="JsonResponseTextArea"  [value]="formattedJson" class="json-template" readonly></textarea>
+      <button (click)="clearData()"  class="send-button">Clear</button>
     </div>
 </div>

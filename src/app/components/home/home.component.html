@@ -3,8 +3,8 @@
       <h1>WebSocket Client</h1>
       <button (click)="OpenSettingDialog()" class="btn btn-primary">Setting</button>
     </div>
-    <p>Status: {{ connectionStatus }}</p>
-    <p>Mode: </p>
+    <p>Status: {{ _sharedData.connectionStatus }}</p>
+    <p>Mode: {{_sharedData.settings.communicationMode}}</p>
     <ng-container *ngIf="_sharedData.settings.communicationMode === 'single'">
       <app-single-mode></app-single-mode>
     </ng-container>
