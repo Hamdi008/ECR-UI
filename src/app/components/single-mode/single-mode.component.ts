@@ -34,8 +34,10 @@ export class SingleModeComponent implements OnInit, DoCheck  {
   constructor(private websocketService: WebsocketService, private sharedData: SharedDataService) {}
 
   ngOnInit() {
+    console.log("ngOnInit Single: connect websocket")
+
     // Connect to the WebSocket server and handle messages
-    this.wsSubscription = this.websocketService.connect('ws://192.168.116.249:50000').subscribe(
+    this.wsSubscription = this.websocketService.connect(this.sharedData.settings.serverAddress + this.sharedData.settings.portNumber).subscribe(
       (message) => {
         if (message.type === 'open') {
           this.sharedData.connectionStatus = 'Connected';
@@ -60,7 +62,9 @@ export class SingleModeComponent implements OnInit, DoCheck  {
       }
     );
     
-    this.requestFileHandle();
+    if(this.sharedData.connectionStatus == 'Connected'){
+      this.requestFileHandle();
+    }
   }
 
   sendMessage() {
@@ -74,6 +78,7 @@ export class SingleModeComponent implements OnInit, DoCheck  {
   }
   
   ngOnDestroy() {
+    console.log("ngOnDestroy Single: close websocket")
     // Unsubscribe and close the WebSocket connection when the component is destroyed
     if (this.wsSubscription) {
       this.wsSubscription.unsubscribe();
