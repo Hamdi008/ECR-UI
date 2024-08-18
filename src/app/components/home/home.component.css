@@ -1,54 +1,37 @@
-.json-template-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.json-template {
-    width: 100%;
-    height: 400px;
-    font-family: monospace;
-    font-size: 14px;
-    background-color: #e9ecef;
-    border: none;
-    resize: none;
-    overflow: auto;
-    padding: 10px;
-    white-space: pre-wrap; /* This will preserve the formatting of JSON */
-    word-wrap: break-word;
-    color: #333;
-    outline: none; /* Remove outline when clicking */
-    border-radius: 5px;
-}
-.json-template[readonly] {
-    background-color: #e9ecef;
-    color: #333;
-}
-
-.send-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-}
-.send-button:hover {
-    background-color: #0056b3;
-}
-
 .status-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
+
+  .square-template {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 300px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.square-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5d79f5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.square-button:hover {
+    background-color: #4e45a0;
+}

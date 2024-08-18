@@ -5,6 +5,22 @@
     </div>
     <p>Status: {{ _sharedData.connectionStatus }}</p>
     <p>Mode: {{_sharedData.settings.communicationMode}}</p>
+    <div class="square-template">
+      <button class="square-button">Payment</button>
+      <button class="square-button">Form Entry</button>
+      <button class="square-button">Form Update</button>
+      <button class="square-button">Line Display</button>
+      <button class="square-button">Printing</button>
+      <button class="square-button">Device</button>
+      <button class="square-button">Configuration</button>
+      <button class="square-button">Audio</button>
+      <button class="square-button">Barcode</button>
+      <button class="square-button">Security</button>
+      <button class="square-button">File</button>
+      <button class="square-button">Version</button>
+      <button class="square-button">Update</button>
+      <button class="square-button">FlowID Status</button>
+  </div>
     <ng-container *ngIf="_sharedData.settings.communicationMode === 'single'">
       <app-single-mode></app-single-mode>
     </ng-container>
