@@ -7,7 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopupComponent } from './components/popup/popup.component';
@@ -18,7 +18,13 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ServicesComponent } from './components/services/services.component';
 import { SingleModeComponent } from './components/single-mode/single-mode.component';
 import { MultipleModeComponent } from './components/multiple-mode/multiple-mode.component';
-import { SettingPopupComponent } from './components/setting-popup/setting-popup.component'
+import { SettingPopupComponent } from './components/setting-popup/setting-popup.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+
+
 
 @NgModule({
   declarations: [
@@ -43,6 +49,11 @@ import { SettingPopupComponent } from './components/setting-popup/setting-popup.
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
