@@ -1,27 +1,59 @@
-<div class="signup-container">
-    <div class="card">
-      <div class="card-body p-4">
-        <h2 class="card-title mb-4">Sign Up</h2>
-        <form>
-          <div class="mb-3">
-            <label for="name" class="form-label">Full Name</label>
-            <input [(ngModel)]="user.fullname" type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
+<div class="card-container">
+  <mat-card class="custom-card">
+    <mat-card-title>Sign Up</mat-card-title>
+    <mat-card-content>
+      <div>
+        <div class="card">
+          <div class="card-body p-4">
+            <form>
+              <div class="example-container">
+                <mat-form-field appearance="fill">
+                  <mat-label>Full Name</mat-label>
+                  <input [(ngModel)]="user.fullname" name="fullname" matInput placeholder="Ex. Jhon Doe">
+                </mat-form-field>
+              </div>
+              <div class="example-container">
+                <mat-form-field appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput [formControl]="user.email" [errorStateMatcher]="matcher"
+                    placeholder="Ex. pat@example.com">
+                  <mat-hint>Errors appear instantly!</mat-hint>
+                  <mat-error *ngIf="user.email.hasError('email') && !user.email.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="user.email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="example-container">
+                <mat-form-field appearance="fill">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" type="password" placeholder="Enter your password"
+                    required>
+                  <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{ hide ? 'visibility' : 'visibility_off' }}
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="example-container">
+                <mat-form-field appearance="fill">
+                  <mat-label>Confirm password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" type="password"
+                    placeholder="Confirm your password" required>
+                  <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{ hide ? 'visibility' : 'visibility_off' }}
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </form>
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input [(ngModel)]="user.email" type="email" class="form-control" id="email" name="email" placeholder="example@example.com" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="********" required>
-          </div>
-          <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input [(ngModel)]="user.password" type="password" class="form-control" id="confirmPassword" name="password" placeholder="********" required>
-          </div>
-          <button (click)="signUp()" type="submit" class="btn btn-primary">Sign Up</button>
-          <p class="mt-3 mb-0 text-center">Already have an account? <a routerLink="/signIn">Sign here</a></p>
-        </form>
+        </div>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="signUp()" type="submit" class="btn btn-primary">Sign Up</button>
+      <p class="mt-3 mb-0 text-center">Already have an account? <a routerLink="/signIn">Sign In here</a></p>
+    </mat-card-actions>
+  </mat-card>
+</div>

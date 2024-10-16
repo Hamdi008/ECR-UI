@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
+import {FormControl, Validators,FormGroupDirective, NgForm,} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-sign-up',
@@ -10,14 +20,31 @@ import { PopupComponent } from '../popup/popup.component';
 })
 export class SignUpComponent implements OnInit {
 
-  user = {
-    fullname: '',
-    email: '',
+  hide = true; // Controls the visibility of the password
+
+    user = {
+    fullname: ' ',
+    email: new FormControl('', [Validators.required, Validators.email]),
     password:''
   }
   constructor(private _http:HttpService, private matDialogRef: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  matcher = new MyErrorStateMatcher();
+
+  getErrorMessage() {
+    if (this.user.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.user.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+
+  togglePasswordVisibility() {
+    this.hide = !this.hide; // Toggle the visibility state
   }
 
   openDialog(title: String, msg:String){
@@ -37,7 +64,7 @@ export class SignUpComponent implements OnInit {
         this.openDialog("Welcome " + this.user.fullname, "You are successfully Signed Up");
         this.user = {
           fullname: '',
-          email: '',
+          email: new FormControl('', [Validators.required, Validators.email]),
           password : ''
         }
       },

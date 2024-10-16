@@ -1,0 +1,20 @@
+
+.card-container {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    height: 80vh;            /* Full viewport height to center vertically */
+  }
+  
+  .custom-card {
+    width: 800px;             /* Optional: set a fixed width for the card */
+    height: 600px;            /* Optional: set a fixed height for the card */
+  }
+  
+.example-container .mat-form-field {
+    margin-left: 8px;
+  }
+
+
+ 
+  
