@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
   hide = true; // Controls the visibility of the password
 
     user = {
-    fullname: ' ',
+    fullname: '',
     email: new FormControl('', [Validators.required, Validators.email]),
     password:''
   }
@@ -57,7 +57,12 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp(){
-    this._http.createUser(this.user)
+    let signUpUser = {
+      fullname: this.user.fullname,
+      email: this.user.email.value,
+      password:this.user.password
+    }
+    this._http.createUser(signUpUser)
     .subscribe(
       res=>{
         console.log(res);

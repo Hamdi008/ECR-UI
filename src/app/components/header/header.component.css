@@ -1,0 +1,36 @@
+.sidenav-container {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .sidenav {
+    width: 250px;
+  }
+  
+  .responsive-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  @media (max-width: 600px) {
+    .auth-buttons {
+      display: none;
+    }
+  
+    .toolbar-title {
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+  
+  @media (min-width: 601px) {
+    .toolbar-title {
+      text-align: left;
+    }
+  }
+  

@@ -1,20 +1,28 @@
-
 .card-container {
-    display: flex;
-    justify-content: center;  /* Centers horizontally */
-    align-items: center;      /* Centers vertically */
-    height: 80vh;            /* Full viewport height to center vertically */
-  }
-  
-  .custom-card {
-    width: 800px;             /* Optional: set a fixed width for the card */
-    height: 600px;            /* Optional: set a fixed height for the card */
-  }
-  
+  display: flex;
+  justify-content: center;  /* Centers horizontally */
+  align-items: center;      /* Centers vertically */
+  height: 80vh;            /* Full viewport height to center vertically */
+}
+
+.custom-card {
+  width: 100%;              /* Use full width on smaller screens */
+  max-width: 400px;        /* Maximum width for larger screens */
+  height: auto;            /* Height auto to adjust based on content */
+  padding: 20px;           /* Padding for better spacing */
+}
+
 .example-container .mat-form-field {
-    margin-left: 8px;
+  width: 100%;             /* Make the form fields take full width */
+}
+
+.full-width {
+  width: 100%;             /* Ensure mat-form-field is full width */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .custom-card {
+    width: 90%;             /* Decrease width for smaller screens */
   }
-
-
- 
-  
+}

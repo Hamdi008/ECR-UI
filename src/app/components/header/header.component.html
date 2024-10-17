@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/home">
         <img src="assets/logo.jpg" alt="ECR-UI Logo" width="30" height="30" class="d-inline-block align-text-top">
@@ -32,4 +32,38 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" class="sidenav">
+      <mat-nav-list>
+        <ng-container *ngFor="let item of menuItems">
+          <a mat-list-item (click)="handleMenuClick(item.action)">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.label }}</span>
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary" class="responsive-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="toolbar-title">My Application Header</span>
+        <span class="spacer"></span>
+        <div class="auth-buttons">
+          <button mat-button routerLink="/signIn">Sign In</button>
+          <button mat-button routerLink="/signUp">Sign Up</button>
+        </div>
+      </mat-toolbar>
+
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
+  
+  

@@ -2,31 +2,24 @@
   <mat-card class="custom-card">
     <mat-card-title>Sign In</mat-card-title>
     <mat-card-content>
-      <div>
-        <div class="card">
-          <div class="card-body p-4">
-            <form>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Enter your email</mat-label>
-                  <input matInput placeholder="pat@example.com" [formControl]="data.email" required>
-                  <mat-error *ngIf="data.email.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Enter your password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'">
-                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                </mat-form-field>
-              </div>
-            </form>
-          </div>
+      <form>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="data.email" required>
+            <mat-error *ngIf="data.email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
         </div>
-      </div>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="data.password" name="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </form>
     </mat-card-content>
     <mat-card-actions>
       <button (click)="onLogin()" type="submit" class="btn btn-primary">Sign In</button>

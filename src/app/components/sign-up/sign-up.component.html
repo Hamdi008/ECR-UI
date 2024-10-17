@@ -2,54 +2,45 @@
   <mat-card class="custom-card">
     <mat-card-title>Sign Up</mat-card-title>
     <mat-card-content>
-      <div>
-        <div class="card">
-          <div class="card-body p-4">
-            <form>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Full Name</mat-label>
-                  <input [(ngModel)]="user.fullname" name="fullname" matInput placeholder="Ex. Jhon Doe">
-                </mat-form-field>
-              </div>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Email</mat-label>
-                  <input type="email" matInput [formControl]="user.email" [errorStateMatcher]="matcher"
-                    placeholder="Ex. pat@example.com">
-                  <mat-hint>Errors appear instantly!</mat-hint>
-                  <mat-error *ngIf="user.email.hasError('email') && !user.email.hasError('required')">
-                    Please enter a valid email address
-                  </mat-error>
-                  <mat-error *ngIf="user.email.hasError('required')">
-                    Email is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" type="password" placeholder="Enter your password"
-                    required>
-                  <mat-icon matSuffix (click)="togglePasswordVisibility()">
-                    {{ hide ? 'visibility' : 'visibility_off' }}
-                  </mat-icon>
-                </mat-form-field>
-              </div>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Confirm password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" type="password"
-                    placeholder="Confirm your password" required>
-                  <mat-icon matSuffix (click)="togglePasswordVisibility()">
-                    {{ hide ? 'visibility' : 'visibility_off' }}
-                  </mat-icon>
-                </mat-form-field>
-              </div>
-            </form>
-          </div>
+      <form>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Full Name</mat-label>
+            <input type="text" matInput [(ngModel)]="user.fullname" name="fullname" required>
+          </mat-form-field>
         </div>
-      </div>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="user.email" [errorStateMatcher]="matcher" required>
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="user.email.hasError('email') && !user.email.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="user.email.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" required>
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{ hide ? 'visibility' : 'visibility_off' }}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password" required>
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{ hide ? 'visibility' : 'visibility_off' }}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+      </form>
     </mat-card-content>
     <mat-card-actions>
       <button (click)="signUp()" type="submit" class="btn btn-primary">Sign Up</button>

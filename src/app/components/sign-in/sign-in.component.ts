@@ -42,7 +42,8 @@ export class SignInComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.authService.login(this.data.email.value, this.data.password).subscribe({
+    let email: string = this.data.email.value
+    this.authService.login(email, this.data.password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
         this.openDialog("Sign In", "You are successfully Signed In!");
@@ -50,6 +51,7 @@ export class SignInComponent implements OnInit {
       },
       error: (error) => {
         this.openDialog("Sign In", "Sign In failed!");
+        console.log(error)
       }
     });
   }
